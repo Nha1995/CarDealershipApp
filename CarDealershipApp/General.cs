@@ -24,10 +24,10 @@ namespace CarDealershipApp
         {
             Console.WriteLine("Please choose a command: ");
             string commandText = Console.ReadLine();
-            Command curCommand = null;
 
             while (commandText != "end")
             {
+                Command curCommand = null;
                 for (int i = 0; i < _commands.Count; ++i)
                 {
                     if (_commands[i].CommandText() == commandText)
