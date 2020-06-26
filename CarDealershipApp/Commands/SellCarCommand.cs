@@ -7,7 +7,7 @@ namespace CarDealershipApp.Commands
 {
     public class SellCarCommand : CarCommand
     {
-        public SellCarCommand(CarRepository carManager) : base(carManager) { }
+        public SellCarCommand(CarRepository carRepository) : base(carRepository) { }
 
         public override string CommandText()
         {

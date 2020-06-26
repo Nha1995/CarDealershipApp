@@ -9,15 +9,15 @@ namespace CarDealershipApp
     public class General
     {
         private readonly List<Command> _commands;
-        private readonly CarRepository _carManager;
+        private readonly CarRepository _carRepository;
 
         public General()
         {
             _commands = new List<Command>();
-            _carManager = new CarRepository();
-            _commands.Add(new AddCarCommand(_carManager));
-            _commands.Add(new SellCarCommand(_carManager));
-            _commands.Add(new ListCarsCommand(_carManager));
+            _carRepository = new CarRepository();
+            _commands.Add(new AddCarCommand(_carRepository));
+            _commands.Add(new SellCarCommand(_carRepository));
+            _commands.Add(new ListCarsCommand(_carRepository));
         }
 
         public void Start()

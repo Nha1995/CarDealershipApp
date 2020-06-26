@@ -8,7 +8,7 @@ namespace CarDealershipApp.Commands
 {
     public class AddCarCommand : CarCommand
     {
-        public AddCarCommand(CarRepository carManager) : base(carManager) { }
+        public AddCarCommand(CarRepository carRepository) : base(carRepository) { }
 
         public override string CommandText()
         {
@@ -20,7 +20,7 @@ namespace CarDealershipApp.Commands
             Console.WriteLine("Car number: ");
             string number = Console.ReadLine();
             Car car = new Car(number);
-            bool success = _carManager.Add(car);
+            bool success = _carRepository.Add(car);
             string message = "Car added successfully";
             if (!success)
             {
