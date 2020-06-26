@@ -26,7 +26,7 @@ namespace CarDealershipApp.Commands
             {
                 message = $"Car with number {number} already exists";
             }
-            return new CommandResult(true, "Car added successfully");
+            return new CommandResult(success, message);
         }
     }
 }
