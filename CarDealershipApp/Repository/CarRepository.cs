@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CarDealershipApp.Domain;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
-namespace MyCarDealership
+namespace CarDealershipApp.Repository
 {
     public class CarRepository
     {

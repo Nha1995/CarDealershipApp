@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CarDealershipApp.Domain;
+using CarDealershipApp.Repository;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyCarDealership
+namespace CarDealershipApp.Commands
 {
     public class ListCarsCommand : CarCommand
     {
@@ -16,7 +18,7 @@ namespace MyCarDealership
         public override CommandResult Execute()
         {
             int k=0;
-            Console.WriteLine();            
+            Console.WriteLine();
             foreach (Car car in _carRepository.List())
             {
                 if (car.Client == null)

@@ -1,9 +1,12 @@
 ﻿using CarDealershipApp;
+using CarDealershipApp.Commands;
+using CarDealershipApp.DisplayCommands;
+using CarDealershipApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyCarDealership
+namespace CarDealershipApp
 {
     public class General
     {

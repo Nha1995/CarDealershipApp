@@ -1,9 +1,12 @@
-﻿using MyCarDealership;
+﻿using CarDealershipApp;
+using CarDealershipApp.Commands;
+using CarDealershipApp.Domain;
+using CarDealershipApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarDealershipApp
+namespace CarDealershipApp.DisplayCommands
 {
     internal class DisplayContracts : ContractCommand
     {

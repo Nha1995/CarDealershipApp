@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CarDealershipApp.Repository;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyCarDealership
+namespace CarDealershipApp.Commands
 {
     public abstract class ClientCommand : Command
     {

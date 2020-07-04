@@ -1,9 +1,10 @@
-﻿using MyCarDealership;
+﻿using CarDealershipApp;
+using CarDealershipApp.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarDealershipApp
+namespace CarDealershipApp.Repository
 {
     public class ContractRepository
     {

@@ -1,8 +1,11 @@
-﻿using System;
+﻿using CarDealershipApp.Commands;
+using CarDealershipApp.Domain;
+using CarDealershipApp.Repository;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyCarDealership
+namespace CarDealershipApp.DisplayCommands
 {
     public class DisplaySoldCars : CarCommand
     {

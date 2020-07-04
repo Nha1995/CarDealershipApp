@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CarDealershipApp.Domain;
+using CarDealershipApp.Repository;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyCarDealership
+namespace CarDealershipApp.Commands
 {
     class ListClientsCommand : ClientCommand
     {
@@ -28,7 +30,7 @@ namespace MyCarDealership
                         Console.WriteLine($"ID: {client.Cars[i].Id} Number: {client.Cars[i].Number} Model: {client.Cars[i].Model} Year: {client.Cars[i].YearMaking} Color: {client.Cars[i].Color} Price: {client.Cars[i].Price}");
                     }
                 }
-                Console.WriteLine("______________________________________________________________");                
+                Console.WriteLine("______________________________________________________________");
                 ID = client.PassportId;
             }
             if (_ClientRepository.Count() > 1)

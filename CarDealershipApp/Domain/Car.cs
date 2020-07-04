@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace MyCarDealership
+namespace CarDealershipApp.Domain
 {
     public class Car
     {

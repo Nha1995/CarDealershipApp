@@ -1,9 +1,10 @@
-﻿using MyCarDealership;
+﻿using CarDealershipApp;
+using CarDealershipApp.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarDealershipApp
+namespace CarDealershipApp.Commands
 {
     public abstract class ContractCommand : Command
     {
