@@ -1,10 +1,8 @@
-﻿using CarDealershipApp.Domain;
-using CarDealershipApp.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarDealershipApp.Commands
+namespace MyCarDealership
 {
     public class ListCarsCommand : CarCommand
     {
@@ -17,13 +15,29 @@ namespace CarDealershipApp.Commands
 
         public override CommandResult Execute()
         {
-            Console.WriteLine("______________________________");
+            int k=0;
+            Console.WriteLine();            
             foreach (Car car in _carRepository.List())
             {
-                Console.WriteLine(car.Number);
-                Console.WriteLine("______________________________");
+                if (car.Client == null)
+                {
+                    Console.WriteLine($"ID: {car.Id} Number: {car.Number} Model: {car.Model} Year: {car.YearMaking} Color: {car.Color} Price: {car.Price}");
+                    Console.WriteLine("______________________________________________________________");
+                    ++k;
+                }
             }
-            return new CommandResult(true, $"Listed {_carRepository.Count()} cars");
+            if (k == 0)
+            {
+                return new CommandResult(false, "You have no cars");
+            }
+            if (k > 1)
+            {
+                return new CommandResult(true, $"Listed {k} cars");
+            }
+            else
+            {
+                return new CommandResult(true, $"{k} car is listed");
+            }
         }
     }
 }

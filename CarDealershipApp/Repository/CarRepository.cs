@@ -1,13 +1,14 @@
-﻿using CarDealershipApp.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
-namespace CarDealershipApp.Repository
+namespace MyCarDealership
 {
     public class CarRepository
     {
-        private LinkedList<Car> _cars;
+        private static long CurrentID = 0;
+        private readonly LinkedList<Car> _cars;
 
         public CarRepository()
         {
@@ -26,13 +27,37 @@ namespace CarDealershipApp.Repository
 
         public bool Add(Car car)
         {
+            car.Id = ++CurrentID;
             _cars.AddLast(car);
+            LinkedListNode<Car> node;
+            for (node = _cars.First; node != _cars.Last; node = node.Next)
+            {
+                if (_cars.Last.Value.Number == node.Value.Number)
+                {
+                    _cars.RemoveLast();
+                    return false;
+                }
+            }
             return true;
         }
 
-        public bool Sell(string number)
+        public void Sell(Car car, Client client)
         {
-            return true;
+            client.Cars.Add(car);
+            car.Client = client;
+            car.Sold = true;
+        }
+
+        public Car GetCarByNumber(string carNumber)
+        {
+            foreach (Car car in _cars)
+            {
+                if (car.Number == carNumber)
+                {
+                    return car;
+                }
+            }
+            return null;
         }
     }
 }

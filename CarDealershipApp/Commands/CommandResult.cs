@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarDealershipApp.Commands
+namespace MyCarDealership
 {
-    public struct CommandResult
+    public class CommandResult
     {
         public bool Success;
         public string Message;
