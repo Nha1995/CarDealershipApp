@@ -40,13 +40,39 @@ namespace CarDealershipApp.Commands
             Console.WriteLine("Sold buyer's Passport Id:");
             string PassportID = Console.ReadLine();
             Client client = _clientRepository.GetClientByPassportId(PassportID);
-            if ( client == null)
+            if (client == null)
             {
                 string message = $"No client with Passport Id: {PassportID}";
                 return new CommandResult(false, message);
             }
             _carRepository.Sell(car, client);
             Contract contract = new Contract(car, client);
+
+            Console.WriteLine("Payment type (cash or credit):");
+            string paymentType = Console.ReadLine();
+            while (paymentType != "credit" && paymentType != "cash")
+            {
+                Console.WriteLine("Enter the correct command");
+                paymentType = Console.ReadLine();
+            }
+            if (paymentType == "cash")
+            {
+                contract.TotalCost = contract.Car.Price;
+                contract.isCredit = false;
+            }
+            else
+            {
+                contract.isCredit = true;
+                Console.WriteLine("Enter the amount of the first payment:");
+                double firstPay = double.Parse(Console.ReadLine());
+                Console.WriteLine("Credit term:");
+                double Term = double.Parse(Console.ReadLine());
+                contract.FirstPayment = firstPay;
+                contract.CreditTerm = Term;
+                contract.TotalCost = ((contract.Car.Price - contract.FirstPayment) / 10) * (contract.CreditTerm / 12) + contract.Car.Price;
+                contract.MonthlyPayment = (contract.TotalCost - contract.FirstPayment) / contract.CreditTerm;
+            }
+
             _contractRepository.AddContract(contract);
             return new CommandResult(true, "Car sold successfully");
         }

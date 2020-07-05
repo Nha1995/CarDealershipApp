@@ -10,7 +10,6 @@ namespace CarDealershipApp.Domain
         public Client Client;
         public Car Car;
         public long Id;
-        public long  CreditNumber;
         public double TotalCost;
         public double FirstPayment;
         public double CreditTerm;
