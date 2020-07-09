@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CarDealershipApp.Repository
 {
-    public class CarRepository
+    public class CarRepository : ICarRepository
     {
         private static long CurrentID = 0;
         private readonly LinkedList<Car> _cars;

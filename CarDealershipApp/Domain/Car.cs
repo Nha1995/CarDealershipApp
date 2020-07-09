@@ -24,5 +24,16 @@ namespace CarDealershipApp.Domain
             Color = color;
             Price = price;
         }
+
+        public Car(long id, bool sold, string number, string model, string yearmaking, string color, int price)
+        {
+            Number = number;
+            Model = model;
+            YearMaking = yearmaking;
+            Color = color;
+            Price = price;
+            Id = id;
+            Sold = sold;
+        }
     }
 }

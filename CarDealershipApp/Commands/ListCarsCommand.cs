@@ -8,7 +8,7 @@ namespace CarDealershipApp.Commands
 {
     public class ListCarsCommand : CarCommand
     {
-        public ListCarsCommand(CarRepository carRepository) : base(carRepository) { }
+        public ListCarsCommand(ICarRepository carRepository) : base(carRepository) { }
 
         public override string CommandText()
         {

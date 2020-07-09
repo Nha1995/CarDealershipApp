@@ -9,7 +9,7 @@ namespace CarDealershipApp.DisplayCommands
 {
     public class DisplaySoldCars : CarCommand
     {
-        public DisplaySoldCars(CarRepository carRepository) : base(carRepository) { }
+        public DisplaySoldCars(ICarRepository carRepository) : base(carRepository) { }
         public override string CommandText()
         {
             return "display sold cars";

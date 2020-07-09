@@ -11,7 +11,7 @@ namespace CarDealershipApp
     public class General
     {
         private readonly List<Command> _commands;
-        private readonly CarRepository _carRepository;
+        private readonly ICarRepository _carRepository;
         private readonly ClientRepository _clientRepository;
         private readonly ContractRepository _contractRepository;
 
@@ -19,7 +19,7 @@ namespace CarDealershipApp
         {
             _contractRepository = new ContractRepository();
             _clientRepository = new ClientRepository();
-            _carRepository = new CarRepository();
+            _carRepository = new CarDbRepository("Server=.;Database=CarDealership; Integrated Security=true");
             _commands = new List<Command>();
             _commands.Add(new ListClientsCommand(_clientRepository));
             _commands.Add(new AddCarCommand(_carRepository));
