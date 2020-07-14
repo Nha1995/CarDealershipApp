@@ -23,7 +23,15 @@ namespace CarDealershipApp.Repository
 
         public LinkedList<Car> List(bool sold)
         {
-            return _cars;
+                LinkedList<Car> cars = new LinkedList<Car>();
+                foreach (Car car in _cars)
+                {
+                    if (car.Sold == sold)
+                    {
+                        cars.AddLast(car);
+                    }
+                }
+                return cars;
         }
 
         public bool Add(Car car)
