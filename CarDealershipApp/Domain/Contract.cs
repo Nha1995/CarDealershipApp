@@ -10,6 +10,8 @@ namespace CarDealershipApp.Domain
         public Client Client;
         public Car Car;
         public long Id;
+        public long ClientId;
+        public long CarId;
         public double TotalCost;
         public double FirstPayment;
         public double CreditTerm;
@@ -19,6 +21,16 @@ namespace CarDealershipApp.Domain
         {
             Client = client;
             Car = car;
+        }
+        public Contract(long ClientId, long CarId, double TotalCost, double FirstPayment, double CreditTerm, double MonthlyPayment, bool isCredit)
+        {
+            this.ClientId = ClientId;
+            this.CarId = CarId;
+            this.TotalCost = TotalCost;
+            this.FirstPayment = FirstPayment;
+            this.CreditTerm = CreditTerm;
+            this.MonthlyPayment = MonthlyPayment;
+            this.isCredit = isCredit;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace CarDealershipApp.DisplayCommands
 {
     public class DisplayClientsWithCar : ClientCommand
     {
-        public DisplayClientsWithCar(ClientRepository _clRepository) : base(_clRepository) { }
+        public DisplayClientsWithCar(IClientRepository _clRepository) : base(_clRepository) { }
         public override string CommandText()
         {
             return "display clients with car";
@@ -17,6 +17,7 @@ namespace CarDealershipApp.DisplayCommands
 
         public override CommandResult Execute()
         {
+            bool sold = true;
             Console.WriteLine();
             foreach (Client client in _ClientRepository.ClientList())
             {
@@ -25,7 +26,7 @@ namespace CarDealershipApp.DisplayCommands
                     Console.WriteLine($"{client.Surname} {client.Name} Passport Id: {client.PassportId} \n Client cars:");
                     foreach (Car car in client.Cars)
                     {
-                        Console.WriteLine($"ID: {car.Id} Number: {car.Number} Model: {car.Model} Year: {car.YearMaking} Color: {car.Color} Price: {car.Price}");
+                        Console.WriteLine($"ID: {car.Id} Number: {car.Number} Model: {car.Model} Year: {car.Year} Color: {car.Color} Price: {car.Price}");
                     }
                 }
             }

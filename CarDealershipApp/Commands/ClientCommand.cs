@@ -7,8 +7,8 @@ namespace CarDealershipApp.Commands
 {
     public abstract class ClientCommand : Command
     {
-        protected ClientRepository _ClientRepository;
-        public ClientCommand(ClientRepository _clRepository)
+        protected IClientRepository _ClientRepository;
+        public ClientCommand(IClientRepository _clRepository)
         {
             _ClientRepository = _clRepository;
         }

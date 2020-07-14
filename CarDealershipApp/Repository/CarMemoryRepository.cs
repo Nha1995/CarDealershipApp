@@ -6,12 +6,12 @@ using System.Text;
 
 namespace CarDealershipApp.Repository
 {
-    public class CarRepository : ICarRepository
+    public class CarMemoryRepository : ICarRepository
     {
         private static long CurrentID = 0;
         private readonly LinkedList<Car> _cars;
 
-        public CarRepository()
+        public CarMemoryRepository()
         {
             _cars = new LinkedList<Car>();
         }
@@ -21,7 +21,7 @@ namespace CarDealershipApp.Repository
             return _cars.Count;
         }
 
-        public LinkedList<Car> List()
+        public LinkedList<Car> List(bool sold)
         {
             return _cars;
         }

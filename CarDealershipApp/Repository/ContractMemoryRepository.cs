@@ -6,11 +6,11 @@ using System.Text;
 
 namespace CarDealershipApp.Repository
 {
-    public class ContractRepository
+    public class ContractMemoryRepository
     {
         private static long CurrentId=0;
         private readonly LinkedList<Contract> _contracts;
-        public ContractRepository()
+        public ContractMemoryRepository()
         {
             _contracts = new LinkedList<Contract>();
         }

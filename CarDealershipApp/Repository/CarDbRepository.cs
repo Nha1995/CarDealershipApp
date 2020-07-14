@@ -11,52 +11,93 @@ namespace CarDealershipApp.Repository
     {
         public CarDbRepository(string connectionString) : base(connectionString) { }
 
-        public bool Add(Car car)
+        public Car GetCarByNumber(string carNumber)
         {
             using (SqlConnection connection = GetConnection())
             {
-                int sold = car.Sold ? 1 : 0;
-                string insertCommand = $"INSERT INTO CAR VALUES ('{car.Number}','{car.Model}','{car.YearMaking}','{car.Color}',{car.Price}, {sold})";
+                string insertCommand = $"SELECT * FROM Car WHERE Car.Number ='{carNumber}'";
                 SqlCommand command = new SqlCommand(insertCommand, connection);
-                command.ExecuteNonQuery();
-            }
+                DbDataReader reader = command.ExecuteReader();
 
-            return true;
+                if (reader.Read())
+                {
+                    return new Car((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+        public bool Add(Car car)
+        {
+            if (GetCarByNumber(car.Number) == null)
+            {
+                using (SqlConnection connection = GetConnection())
+                {
+                    int sold = car.Sold ? 1 : 0;
+                    string insertCommand = $"INSERT INTO CAR VALUES ('{car.Number}','{car.Model}',{car.Year},'{car.Color}',{car.Price}, {sold}, null)";
+                    SqlCommand command = new SqlCommand(insertCommand, connection);
+                    command.ExecuteNonQuery();
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public int Count()
         {
-            throw new NotImplementedException();
-        }
-
-        public Car GetCarByNumber(string carNumber)
-        {
-            throw new NotImplementedException();
-        }
-
-        public LinkedList<Car> List()
-        {
             using (SqlConnection connection = GetConnection())
             {
-                string selectCommand = $"SELECT * FROM CAR";
+                string selectCommand = $"SELECT COUNT(*) AS Count FROM Car";
+                SqlCommand command = new SqlCommand(selectCommand, connection);
+                DbDataReader reader = command.ExecuteReader();
+
+                reader.Read();
+                    
+                return (int)reader["Count"];
+            }
+        }
+
+        public LinkedList<Car> List(bool sold)
+        {
+            int Sold = sold ? 1 : 0;
+            using (SqlConnection connection = GetConnection())
+            {
+                string selectCommand = $"SELECT * FROM Car LEFT JOIN Client ON Car.ClientId=Client.Id Where Sold = {Sold}";
                 SqlCommand command = new SqlCommand(selectCommand, connection);
                 DbDataReader reader = command.ExecuteReader();
 
                 var carList = new LinkedList<Car>();
-
+                
                 while (reader.Read())
                 {
-                    var car = new Car((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), reader["YearMaking"].ToString(), reader["Color"].ToString(), (int)reader["Price"]);
-                    carList.AddLast(car);
+                    if (Sold == 1)
+                    {
+                        var car = new Car((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
+                        car.Client = new Client((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
+                        carList.AddLast(car);
+                    }
+                    else
+                    {
+                        var car = new Car((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);                        
+                        carList.AddLast(car);
+                    }
                 }
-
                 return carList;
             }
         }
-
         public void Sell(Car car, Client client)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = GetConnection())
+            {
+                string UpdateCommand = $"UPDATE Car SET Sold = 1 , ClientId = {client.Id} WHERE Id = '{car.Id}'";
+                SqlCommand command = new SqlCommand(UpdateCommand, connection);
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

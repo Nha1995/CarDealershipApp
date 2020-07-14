@@ -5,11 +5,11 @@ using System.Text;
 
 namespace CarDealershipApp.Repository
 {
-    public class ClientRepository
+    public class ClientMemoryRepository : IClientRepository
     {
         private static long CurrentID = 0;
         private readonly LinkedList<Client> _clients;
-        public ClientRepository()
+        public ClientMemoryRepository()
         {
             _clients = new LinkedList<Client>();
         }
@@ -19,7 +19,7 @@ namespace CarDealershipApp.Repository
         }
         public LinkedList<Client> ClientList()
         {
-            return _clients;
+                return _clients;
         }
         public bool AddClient(Client client)
         {

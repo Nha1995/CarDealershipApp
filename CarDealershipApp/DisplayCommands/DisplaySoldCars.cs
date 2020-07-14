@@ -17,14 +17,15 @@ namespace CarDealershipApp.DisplayCommands
 
         public override CommandResult Execute()
         {
+            bool sold = true;
             Console.WriteLine();
 
-            foreach (Car car in _carRepository.List())
+            foreach (Car car in _carRepository.List(sold))
             {
                 if (car.Client != null)
                 {
-                    Console.WriteLine($"ID: {car.Id} Number: {car.Number} Model: {car.Model} Year: {car.YearMaking} Color: {car.Color} Price: {car.Price}");
-                    Console.WriteLine($"Client: {car.Client.Surname} {car.Client.Name} Passport Id: {car.Client.PassportId}");
+                    Console.WriteLine($"Car Id: {car.Id}, Number: {car.Number}, Model: {car.Model}, Year: {car.Year}, Color: {car.Color}, Price: {car.Price}");
+                    Console.WriteLine($"Client Id: {car.Client.Id}, Client: {car.Client.Surname} {car.Client.Name}, Passport Id: {car.Client.PassportId}");
                 }
                 Console.WriteLine("______________________________________________________________");
             }

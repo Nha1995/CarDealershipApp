@@ -12,14 +12,14 @@ namespace CarDealershipApp
     {
         private readonly List<Command> _commands;
         private readonly ICarRepository _carRepository;
-        private readonly ClientRepository _clientRepository;
-        private readonly ContractRepository _contractRepository;
+        private readonly IClientRepository _clientRepository;
+        private readonly IContractRepository _contractRepository;
 
-        public General()
+        public General(string connectionString)
         {
-            _contractRepository = new ContractRepository();
-            _clientRepository = new ClientRepository();
-            _carRepository = new CarDbRepository("Server=.;Database=CarDealership; Integrated Security=true");
+            _contractRepository = new ContractDbRepository(connectionString);
+            _clientRepository = new ClientDbRepository(connectionString);
+            _carRepository = new CarDbRepository(connectionString);
             _commands = new List<Command>();
             _commands.Add(new ListClientsCommand(_clientRepository));
             _commands.Add(new AddCarCommand(_carRepository));
@@ -30,7 +30,6 @@ namespace CarDealershipApp
             _commands.Add(new DisplayClientsWithCar(_clientRepository));
             _commands.Add(new DisplayContracts(_contractRepository));
         }
-
         public void Start()
         {
             Console.WriteLine("Please choose a command: ");

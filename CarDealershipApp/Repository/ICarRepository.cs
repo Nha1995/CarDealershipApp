@@ -9,7 +9,7 @@ namespace CarDealershipApp.Repository
     {
         int Count();
 
-        LinkedList<Car> List();
+        LinkedList<Car> List(bool sold);
 
         bool Add(Car car);
 

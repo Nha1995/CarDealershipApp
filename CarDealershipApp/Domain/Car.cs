@@ -9,27 +9,27 @@ namespace CarDealershipApp.Domain
     {
         public string Number;
         public string Model;
-        public string YearMaking;
+        public int Year;
         public string Color;
         public int Price;
         public long Id;
         public bool Sold;
-
         public Client Client;
-        public Car(string number, string model, string yearmaking, string color, int price)
+
+        public Car(string number, string model, int yearmaking, string color, int price)
         {
             Number = number;
             Model = model;
-            YearMaking = yearmaking;
+            Year = yearmaking;
             Color = color;
             Price = price;
         }
 
-        public Car(long id, bool sold, string number, string model, string yearmaking, string color, int price)
+        public Car(long id, bool sold, string number, string model, int yearmaking, string color, int price)
         {
             Number = number;
             Model = model;
-            YearMaking = yearmaking;
+            Year = yearmaking;
             Color = color;
             Price = price;
             Id = id;

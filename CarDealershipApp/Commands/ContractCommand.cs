@@ -8,8 +8,8 @@ namespace CarDealershipApp.Commands
 {
     public abstract class ContractCommand : Command
     {
-        protected ContractRepository _contractRepository;
-        public ContractCommand(ContractRepository contractRepository)
+        protected IContractRepository _contractRepository;
+        public ContractCommand(IContractRepository contractRepository)
         {
             _contractRepository = contractRepository;
         }

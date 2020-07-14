@@ -8,7 +8,7 @@ namespace CarDealershipApp.Commands
 {
     public class AddClientCommand : ClientCommand
     {
-        public AddClientCommand(ClientRepository _clRepository) : base(_clRepository) { }
+        public AddClientCommand(IClientRepository _clRepository) : base(_clRepository) { }
         public override string CommandText()
         {
             return "add client";

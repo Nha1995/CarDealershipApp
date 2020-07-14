@@ -18,5 +18,13 @@ namespace CarDealershipApp.Domain
             Name = name;
             Cars = new List<Car>();
         }
+        public Client(long id, string passportId, string surname, string name)
+        {
+            PassportId = passportId;
+            Surname = surname;
+            Name = name;
+            Cars = new List<Car>();
+            Id = id;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace CarDealershipApp
     {
         static void Main(string[] args)
         {
-            General general = new General();
+            General general = new General("Server=localhost\\SQLEXPRESS;Database=CarDealership; Integrated Security=true");
             general.Start();
         }
     }

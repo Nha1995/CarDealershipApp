@@ -8,7 +8,10 @@ namespace CarDealershipApp.Commands
 {
     class ListClientsCommand : ClientCommand
     {
-        public ListClientsCommand(ClientRepository _clRepository) : base(_clRepository) { }
+        private IClientRepository clientRepository;
+
+        public ListClientsCommand(IClientRepository _clRepository) : base(_clRepository) { }
+
 
         public override string CommandText()
         {
@@ -17,6 +20,7 @@ namespace CarDealershipApp.Commands
 
         public override CommandResult Execute()
         {
+            bool sold = false;
             string ID;
             Console.WriteLine();
             foreach (Client client in _ClientRepository.ClientList())
@@ -27,7 +31,7 @@ namespace CarDealershipApp.Commands
                     Console.WriteLine("Client cars: ");
                     for (int i =0;i<client.Cars.Count;i++)
                     {
-                        Console.WriteLine($"ID: {client.Cars[i].Id} Number: {client.Cars[i].Number} Model: {client.Cars[i].Model} Year: {client.Cars[i].YearMaking} Color: {client.Cars[i].Color} Price: {client.Cars[i].Price}");
+                        Console.WriteLine($"ID: {client.Cars[i].Id} Number: {client.Cars[i].Number} Model: {client.Cars[i].Model} Year: {client.Cars[i].Year} Color: {client.Cars[i].Color} Price: {client.Cars[i].Price}");
                     }
                 }
                 Console.WriteLine("______________________________________________________________");

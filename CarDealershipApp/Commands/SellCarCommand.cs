@@ -9,9 +9,9 @@ namespace CarDealershipApp.Commands
 {
     public class SellCarCommand : CarCommand
     {
-        private ClientRepository _clientRepository;
-        private ContractRepository _contractRepository;
-        public SellCarCommand(ContractRepository contractRepository, ICarRepository carRepository, ClientRepository clientRepository) : base(carRepository)
+        private IClientRepository _clientRepository;
+        private IContractRepository _contractRepository;
+        public SellCarCommand(IContractRepository contractRepository, ICarRepository carRepository, IClientRepository clientRepository) : base(carRepository)
         {
             _clientRepository = clientRepository;
             _contractRepository = contractRepository;

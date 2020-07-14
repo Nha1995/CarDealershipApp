@@ -22,7 +22,7 @@ namespace CarDealershipApp.Commands
             Console.WriteLine("Model:");
             string model = Console.ReadLine();
             Console.WriteLine("Year making:");
-            string YearMaking = Console.ReadLine();
+            int YearMaking = int.Parse(Console.ReadLine());
             Console.WriteLine("Color:");
             string Color = Console.ReadLine();
             Console.WriteLine("Price");
