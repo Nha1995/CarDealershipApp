@@ -1,9 +1,8 @@
-﻿using CarDealershipApp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarDealershipApp.Domain
+namespace CarDealershipDomain
 {
     public class Contract
     {

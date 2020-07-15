@@ -1,4 +1,4 @@
-﻿using CarDealershipApp.Domain;
+﻿using CarDealershipDomain;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -34,7 +34,7 @@ namespace CarDealershipApp.Repository
                 while (reader.Read())
                 {
                     var contract = new Contract((long)reader["ClientId"], (long)reader["CarId"], (double)reader["TotalCost"], (double)reader["FirstPayment"], (double)reader["CreditTerm"], (double)reader["MonthlyPayment"],(bool)reader["isCredit"]);
-                    
+
                     contract.Car = new Car((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
                     contract.Client = new Client((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
 

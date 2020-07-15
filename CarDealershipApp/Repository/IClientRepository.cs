@@ -1,4 +1,4 @@
-﻿using CarDealershipApp.Domain;
+﻿using CarDealershipDomain;
 using System;
 using System.Collections.Generic;
 using System.Text;

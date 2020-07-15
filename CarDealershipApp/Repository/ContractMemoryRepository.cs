@@ -1,12 +1,12 @@
 ﻿using CarDealershipApp;
-using CarDealershipApp.Domain;
+using CarDealershipDomain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace CarDealershipApp.Repository
 {
-    public class ContractMemoryRepository
+    public class ContractMemoryRepository : IContractRepository
     {
         private static long CurrentId=0;
         private readonly LinkedList<Contract> _contracts;

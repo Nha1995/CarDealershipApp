@@ -1,6 +1,6 @@
 ﻿using CarDealershipApp;
 using CarDealershipApp.Commands;
-using CarDealershipApp.Domain;
+using CarDealershipDomain;
 using CarDealershipApp.Repository;
 using System;
 using System.Collections.Generic;

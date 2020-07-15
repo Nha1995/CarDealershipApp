@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarDealershipApp.Domain
+namespace CarDealershipDomain
 {
     public class Client
     {

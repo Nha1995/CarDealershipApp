@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using CarDealershipApp.Domain;
+using CarDealershipDomain;
 
 namespace CarDealershipApp.Repository
 {

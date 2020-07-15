@@ -1,4 +1,4 @@
-﻿using CarDealershipApp.Domain;
+﻿using CarDealershipDomain;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -57,7 +57,7 @@ namespace CarDealershipApp.Repository
                 DbDataReader reader = command.ExecuteReader();
 
                 reader.Read();
-                    
+
                 return (int)reader["Count"];
             }
         }
@@ -72,7 +72,7 @@ namespace CarDealershipApp.Repository
                 DbDataReader reader = command.ExecuteReader();
 
                 var carList = new LinkedList<Car>();
-                
+
                 while (reader.Read())
                 {
                     if (Sold == 1)
@@ -83,7 +83,7 @@ namespace CarDealershipApp.Repository
                     }
                     else
                     {
-                        var car = new Car((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);                        
+                        var car = new Car((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
                         carList.AddLast(car);
                     }
                 }

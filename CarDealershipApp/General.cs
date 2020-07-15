@@ -17,9 +17,9 @@ namespace CarDealershipApp
 
         public General(string connectionString)
         {
-            _contractRepository = new ContractDbRepository(connectionString);
-            _clientRepository = new ClientDbRepository(connectionString);
-            _carRepository = new CarDbRepository(connectionString);
+            _contractRepository = new ContractMemoryRepository();
+            _clientRepository = new ClientMemoryRepository();
+            _carRepository = new CarMemoryRepository();
             _commands = new List<Command>();
             _commands.Add(new ListClientsCommand(_clientRepository));
             _commands.Add(new AddCarCommand(_carRepository));
