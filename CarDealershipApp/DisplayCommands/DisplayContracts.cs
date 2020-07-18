@@ -1,7 +1,7 @@
 ﻿using CarDealershipApp;
-using CarDealershipApp.Commands;
+using CarDealershipCommands;
 using CarDealershipDomain;
-using CarDealershipApp.Repository;
+using CarDealershipRepository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;

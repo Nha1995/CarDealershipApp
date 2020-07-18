@@ -1,10 +1,11 @@
 ﻿using CarDealershipApp;
-using CarDealershipApp.Commands;
+using CarDealershipCommands;
 using CarDealershipApp.DisplayCommands;
-using CarDealershipApp.Repository;
+using CarDealershipRepository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using CarDealershipRepository.AdoNet;
 
 namespace CarDealershipApp
 {
@@ -17,9 +18,9 @@ namespace CarDealershipApp
 
         public General(string connectionString)
         {
-            _contractRepository = new ContractMemoryRepository();
-            _clientRepository = new ClientMemoryRepository();
-            _carRepository = new CarMemoryRepository();
+            _contractRepository = new ContractDbRepository(connectionString);
+            _clientRepository = new ClientDbRepository(connectionString);
+            _carRepository = new CarDbRepository(connectionString);
             _commands = new List<Command>();
             _commands.Add(new ListClientsCommand(_clientRepository));
             _commands.Add(new AddCarCommand(_carRepository));

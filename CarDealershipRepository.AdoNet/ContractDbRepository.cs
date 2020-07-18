@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
+using CarDealershipRepository.Interfaces;
 
-namespace CarDealershipApp.Repository
+namespace CarDealershipRepository.AdoNet
 {
     public class ContractDbRepository : DbRepository, IContractRepository
     {

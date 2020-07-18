@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
-
+	
   <ItemGroup>
     <ProjectReference Include="..\CarDealershipDomain\CarDealershipDomain.csproj" />
+    <ProjectReference Include="..\CarDealershipRepository.AdoNet\CarDealershipRepository.AdoNet.csproj" />
+    <ProjectReference Include="..\CarDealershipRepository.InMemory\CarDealershipRepository.InMemory.csproj" />
   </ItemGroup>
-
+	
 </Project>

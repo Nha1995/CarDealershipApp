@@ -1,11 +1,12 @@
-﻿using CarDealershipDomain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
+using CarDealershipDomain;
+using CarDealershipRepository.Interfaces;
 
-namespace CarDealershipApp.Repository
+namespace CarDealershipRepository.AdoNet
 {
     public class CarDbRepository : DbRepository, ICarRepository
     {

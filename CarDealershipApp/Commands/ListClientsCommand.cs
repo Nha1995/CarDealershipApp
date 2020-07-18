@@ -1,14 +1,14 @@
 ﻿using CarDealershipDomain;
-using CarDealershipApp.Repository;
+using CarDealershipRepository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarDealershipApp.Commands
+namespace CarDealershipCommands
 {
-    class ListClientsCommand : ClientCommand
+    public class ListClientsCommand : ClientCommand
     {
-        private IClientRepository clientRepository;
+        public IClientRepository clientRepository;
 
         public ListClientsCommand(IClientRepository _clRepository) : base(_clRepository) { }
 

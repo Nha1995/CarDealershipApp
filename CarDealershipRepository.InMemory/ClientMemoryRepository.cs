@@ -1,9 +1,10 @@
 ﻿using CarDealershipDomain;
+using CarDealershipRepository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarDealershipApp.Repository
+namespace CarDealershipRepository.InMemory
 {
     public class ClientMemoryRepository : IClientRepository
     {

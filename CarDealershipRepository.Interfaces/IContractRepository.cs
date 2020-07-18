@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using CarDealershipDomain;
 
-namespace CarDealershipApp.Repository
+namespace CarDealershipRepository.Interfaces
 {
     public interface IContractRepository
     {

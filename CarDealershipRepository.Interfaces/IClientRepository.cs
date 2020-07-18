@@ -1,9 +1,9 @@
-﻿using CarDealershipDomain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CarDealershipDomain;
 
-namespace CarDealershipApp.Repository
+namespace CarDealershipRepository.Interfaces
 {
     public interface IClientRepository
     {
