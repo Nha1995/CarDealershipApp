@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using CarDealershipRepository.AdoNet;
+using CarDealershipApp.Options;
+using CarDealershipRepository.InMemory;
 
 namespace CarDealershipApp
 {
@@ -16,11 +18,22 @@ namespace CarDealershipApp
         private readonly IClientRepository _clientRepository;
         private readonly IContractRepository _contractRepository;
 
-        public General(string connectionString)
+        public General(AppOptions appOptions)
         {
-            _contractRepository = new ContractDbRepository(connectionString);
-            _clientRepository = new ClientDbRepository(connectionString);
-            _carRepository = new CarDbRepository(connectionString);
+            string connectionString = appOptions.ConnectionString;
+            switch (appOptions.Mode)
+            {
+                case AppMode.InMemory:
+                    _contractRepository = new ContractMemoryRepository();
+                    _clientRepository = new ClientMemoryRepository();
+                    _carRepository = new CarMemoryRepository();
+                    break;
+                case AppMode.AdoNet:
+                    _contractRepository = new ContractDbRepository(connectionString);
+                    _clientRepository = new ClientDbRepository(connectionString);
+                    _carRepository = new CarDbRepository(connectionString);
+                    break;
+            }
             _commands = new List<Command>();
             _commands.Add(new ListClientsCommand(_clientRepository));
             _commands.Add(new AddCarCommand(_carRepository));
