@@ -27,7 +27,7 @@ namespace CarDealershipCommands
             string Color = Console.ReadLine();
             Console.WriteLine("Price");
             int Price = int.Parse(Console.ReadLine());
-            Car car = new Car(number, model, YearMaking, Color, Price);
+            Car car = Car.CreateCar(number, model, YearMaking, Color, Price);
             bool success = _carRepository.Add(car);
             string message = "Car added successfully";
             if (!success)

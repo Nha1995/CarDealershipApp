@@ -6,25 +6,41 @@ namespace CarDealershipDomain
 {
     public class Client
     {
-        public string PassportId;
-        public string Surname;
-        public string Name;
-        public long Id;
-        public List<Car> Cars;
-        public Client(string passportId, string surname, string name)
+        public string PassportId { get; set; }
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public long Id { get; set; }
+        public List<Car> Cars { get; set; }
+
+        public Client()
         {
-            PassportId = passportId;
-            Surname = surname;
-            Name = name;
-            Cars = new List<Car>();
+
         }
-        public Client(long id, string passportId, string surname, string name)
+
+        public static Client CreateClient(string passportId, string surname, string name)
         {
-            PassportId = passportId;
-            Surname = surname;
-            Name = name;
-            Cars = new List<Car>();
-            Id = id;
+            Client client = new Client
+            {
+                PassportId = passportId,
+                Surname = surname,
+                Name = name,
+                Cars = new List<Car>(),
+            };
+
+            return client;
+        }
+        public static Client CreateClient(long id, string passportId, string surname, string name)
+        {
+            Client client = new Client
+            {
+                PassportId = passportId,
+                Surname = surname,
+                Name = name,
+                Cars = new List<Car>(),
+                Id = id
+            };
+
+            return client;
         }
     }
 }

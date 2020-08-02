@@ -18,7 +18,7 @@ namespace CarDealershipCommands
         {
             Console.WriteLine("Write client passportID, surname and name(on one line):");
             string[] clientdata = Console.ReadLine().Split(' ');
-            Client client = new Client(clientdata[0], clientdata[1], clientdata[2]);
+            Client client = Client.CreateClient(clientdata[0], clientdata[1], clientdata[2]);
             bool success = _ClientRepository.AddClient(client);
             string message = "Client added successfully";
             if (!success)

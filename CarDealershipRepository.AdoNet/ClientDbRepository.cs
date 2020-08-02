@@ -41,27 +41,27 @@ namespace CarDealershipRepository.AdoNet
 
                 var clientList = new LinkedList<Client>();
                 reader.Read();
-                instanceClient = new Client((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
+                instanceClient = Client.CreateClient((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
 
                 if (reader["CarId"] != DBNull.Value)
                 {
-                    instanceClient.Cars.Add(new Car((long)reader["CarId"], true, reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]));
+                    instanceClient.Cars.Add(Car.CreateCar((long)reader["CarId"], true, reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]));
                 }
                 while (reader.Read())
                 {
                     if((long)reader["ClientId"] == instanceClient.Id)
                     {
-                        instanceClient.Cars.Add(new Car((long)reader["CarId"], true, reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]));
+                        instanceClient.Cars.Add(Car.CreateCar((long)reader["CarId"], true, reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]));
                     }
                     else
                     {
                         clientList.AddLast(instanceClient);
 
-                        instanceClient = new Client((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
+                        instanceClient = Client.CreateClient((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
 
                         if (reader["CarId"] != DBNull.Value)
                         {
-                            instanceClient.Cars.Add(new Car((long)reader["CarId"], true, reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]));
+                            instanceClient.Cars.Add(Car.CreateCar((long)reader["CarId"], true, reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]));
                         }
                     }
                 }
@@ -94,7 +94,7 @@ namespace CarDealershipRepository.AdoNet
 
                 if (reader.Read())
                 {
-                    return new Client((long)reader["Id"], reader["PassportId"].ToString(),reader["Surname"].ToString(),reader["Name"].ToString());
+                    return Client.CreateClient((long)reader["Id"], reader["PassportId"].ToString(),reader["Surname"].ToString(),reader["Name"].ToString());
                 }
                 else
                 {

@@ -22,7 +22,7 @@ namespace CarDealershipRepository.AdoNet
 
                 if (reader.Read())
                 {
-                    return new Car((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
+                    return Car.CreateCar((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
                 }
                 else
                 {
@@ -78,13 +78,13 @@ namespace CarDealershipRepository.AdoNet
                 {
                     if (Sold == 1)
                     {
-                        var car = new Car((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
-                        car.Client = new Client((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
+                        var car = Car.CreateCar((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
+                        car.Client = Client.CreateClient((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
                         carList.AddLast(car);
                     }
                     else
                     {
-                        var car = new Car((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
+                        var car = Car.CreateCar((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
                         carList.AddLast(car);
                     }
                 }
