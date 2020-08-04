@@ -11,7 +11,7 @@ namespace CarDealershipRepository.Ef
         public CarDealershipDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<CarDealershipDbContext>();
-            optionsBuilder.UseSqlServer("Server=.;Database=CarDealershipEf; Integrated Security=true");
+            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=CarDealershipEf; Integrated Security=true");
 
             return new CarDealershipDbContext(optionsBuilder.Options);
         }
