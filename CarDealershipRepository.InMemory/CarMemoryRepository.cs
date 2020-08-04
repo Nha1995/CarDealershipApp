@@ -22,14 +22,14 @@ namespace CarDealershipRepository.InMemory
             return _cars.Count;
         }
 
-        public LinkedList<Car> List(bool sold)
+        public List<Car> List(bool sold)
         {
-                LinkedList<Car> cars = new LinkedList<Car>();
+                List<Car> cars = new List<Car>();
                 foreach (Car car in _cars)
                 {
                     if (car.Sold == sold)
                     {
-                        cars.AddLast(car);
+                        cars.Add(car);
                     }
                 }
                 return cars;

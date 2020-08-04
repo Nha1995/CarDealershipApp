@@ -8,6 +8,8 @@ using System.Text;
 using CarDealershipRepository.AdoNet;
 using CarDealershipApp.Options;
 using CarDealershipRepository.InMemory;
+using CarDealershipRepository.Ef;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarDealershipApp
 {
@@ -32,6 +34,10 @@ namespace CarDealershipApp
                     _contractRepository = new ContractDbRepository(connectionString);
                     _clientRepository = new ClientDbRepository(connectionString);
                     _carRepository = new CarDbRepository(connectionString);
+                    break;
+                case AppMode.Ef:
+                    var dbContext = CreateDbContext(appOptions.ConnectionString);
+                    _carRepository = new CarEfRepository(dbContext);
                     break;
             }
             _commands = new List<Command>();
@@ -74,6 +80,14 @@ namespace CarDealershipApp
 
                 commandText = Console.ReadLine();
             }
+        }
+
+        private CarDealershipDbContext CreateDbContext(string connectionString)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<CarDealershipDbContext>();
+            optionsBuilder.UseSqlServer(connectionString);
+
+            return new CarDealershipDbContext(optionsBuilder.Options);
         }
 
         private void ExecuteCommand(Command command)

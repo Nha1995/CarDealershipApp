@@ -9,7 +9,7 @@ namespace CarDealershipRepository.Interfaces
     {
         int Count();
 
-        LinkedList<Car> List(bool sold);
+        List<Car> List(bool sold);
 
         bool Add(Car car);
 

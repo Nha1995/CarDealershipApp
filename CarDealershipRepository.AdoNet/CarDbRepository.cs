@@ -63,7 +63,7 @@ namespace CarDealershipRepository.AdoNet
             }
         }
 
-        public LinkedList<Car> List(bool sold)
+        public List<Car> List(bool sold)
         {
             int Sold = sold ? 1 : 0;
             using (SqlConnection connection = GetConnection())
@@ -72,7 +72,7 @@ namespace CarDealershipRepository.AdoNet
                 SqlCommand command = new SqlCommand(selectCommand, connection);
                 DbDataReader reader = command.ExecuteReader();
 
-                var carList = new LinkedList<Car>();
+                var carList = new List<Car>();
 
                 while (reader.Read())
                 {
@@ -80,12 +80,12 @@ namespace CarDealershipRepository.AdoNet
                     {
                         var car = Car.CreateCar((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
                         car.Client = Client.CreateClient((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
-                        carList.AddLast(car);
+                        carList.Add(car);
                     }
                     else
                     {
                         var car = Car.CreateCar((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
-                        carList.AddLast(car);
+                        carList.Add(car);
                     }
                 }
                 return carList;
