@@ -20,28 +20,14 @@ namespace CarDealershipApp
         private readonly IClientRepository _clientRepository;
         private readonly IContractRepository _contractRepository;
 
-        public General(AppOptions appOptions)
+        public General(ICarRepository carRepository,
+            IClientRepository clientRepository,
+            IContractRepository contractRepository)
         {
-            string connectionString = appOptions.ConnectionString;
-            switch (appOptions.Mode)
-            {
-                case AppMode.InMemory:
-                    _contractRepository = new ContractMemoryRepository();
-                    _clientRepository = new ClientMemoryRepository();
-                    _carRepository = new CarMemoryRepository();
-                    break;
-                case AppMode.AdoNet:
-                    _contractRepository = new ContractDbRepository(connectionString);
-                    _clientRepository = new ClientDbRepository(connectionString);
-                    _carRepository = new CarDbRepository(connectionString);
-                    break;
-                case AppMode.Ef:
-                    var dbContext = CreateDbContext(appOptions.ConnectionString);
-                    _carRepository = new CarEfRepository(dbContext);
-                    _clientRepository = new ClientEfRepository(dbContext);
-                    _contractRepository = new ContractEfRepository(dbContext);
-                    break;
-            }
+            _carRepository = carRepository;
+            _clientRepository = clientRepository;
+            _contractRepository = contractRepository;
+
             _commands = new List<Command>();
             _commands.Add(new ListClientsCommand(_clientRepository));
             _commands.Add(new AddCarCommand(_carRepository));
@@ -82,14 +68,6 @@ namespace CarDealershipApp
 
                 commandText = Console.ReadLine();
             }
-        }
-
-        private CarDealershipDbContext CreateDbContext(string connectionString)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<CarDealershipDbContext>();
-            optionsBuilder.UseSqlServer(connectionString);
-
-            return new CarDealershipDbContext(optionsBuilder.Options);
         }
 
         private void ExecuteCommand(Command command)
