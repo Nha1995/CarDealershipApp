@@ -9,30 +9,30 @@ namespace CarDealershipRepository.InMemory
     public class ClientMemoryRepository : IClientRepository
     {
         private static long CurrentID = 0;
-        private readonly LinkedList<Client> _clients;
+        private readonly List<Client> _clients;
         public ClientMemoryRepository()
         {
-            _clients = new LinkedList<Client>();
+            _clients = new List<Client>();
         }
         public int Count()
         {
             return _clients.Count;
         }
-        public LinkedList<Client> ClientList()
+        public List<Client> ClientList()
         {
                 return _clients;
         }
         public bool AddClient(Client client)
         {
-            LinkedListNode<Client> node;
-            for (node = _clients.First; node != null; node = node.Next)
+            for (int i = 0; i < _clients.Count; i++)
             {
-                if (node.Value.PassportId == client.PassportId)
+                foreach (Client cl in _clients)
                 {
+                    if(cl.PassportId==client.PassportId)
                     return false;
                 }
             }
-            _clients.AddLast(client);
+            _clients.Add(client);
             client.Id = ++CurrentID;
             return true;
         }

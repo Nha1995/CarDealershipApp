@@ -16,21 +16,21 @@ namespace CarDealershipRepository.AdoNet
             using (SqlConnection connection = GetConnection())
             {
                 int isCredit = contract.isCredit ? 1 : 0;
-                string insertCommand = $"INSERT INTO Contract VALUES ({contract.Client.Id}, {contract.Car.Id}, {contract.TotalCost}, {contract.FirstPayment},{contract.CreditTerm},{contract.MonthlyPayment}, {isCredit})";
+                string insertCommand = $"INSERT INTO Contracts VALUES ({contract.Client.Id}, {contract.Car.Id}, {contract.TotalCost}, {contract.FirstPayment},{contract.CreditTerm},{contract.MonthlyPayment}, {isCredit})";
                 SqlCommand command = new SqlCommand(insertCommand, connection);
                 command.ExecuteNonQuery();
             }
         }
 
-        public LinkedList<Contract> ContractList()
+        public List<Contract> ContractList()
         {
             using (SqlConnection connection = GetConnection())
             {
-                string selectCommand = $"SELECT * FROM Contract INNER JOIN CAR ON Contract.CarId = Car.Id INNER JOIN Client ON Client.Id = Contract.ClientId";
+                string selectCommand = $"SELECT * FROM Contracts INNER JOIN CARS ON Contracts.CarId = Cars.Id INNER JOIN Clients ON Clients.Id = Contracts.ClientId";
                 SqlCommand command = new SqlCommand(selectCommand, connection);
                 DbDataReader reader = command.ExecuteReader();
 
-                var contractList = new LinkedList<Contract>();
+                var contractList = new List<Contract>();
 
                 while (reader.Read())
                 {
@@ -39,7 +39,7 @@ namespace CarDealershipRepository.AdoNet
                     contract.Car = Car.CreateCar((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
                     contract.Client = Client.CreateClient((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
 
-                    contractList.AddLast(contract);
+                    contractList.Add(contract);
                 }
                 return contractList;
             }
@@ -49,7 +49,7 @@ namespace CarDealershipRepository.AdoNet
         {
             using (SqlConnection connection = GetConnection())
             {
-                string selectCommand = $"SELECT COUNT(*) AS Count FROM Contract";
+                string selectCommand = $"SELECT COUNT(*) AS Count FROM Contracts";
                 SqlCommand command = new SqlCommand(selectCommand, connection);
                 DbDataReader reader = command.ExecuteReader();
 

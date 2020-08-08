@@ -9,7 +9,7 @@ namespace CarDealershipRepository.Interfaces
     {
         public int Count();
 
-        LinkedList<Contract> ContractList();
+        List<Contract> ContractList();
 
         public void AddContract(Contract contract);
 

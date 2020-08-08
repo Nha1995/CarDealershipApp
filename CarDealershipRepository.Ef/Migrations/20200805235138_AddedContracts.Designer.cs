@@ -4,14 +4,16 @@ using CarDealershipRepository.Ef;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarDealershipRepository.Ef.Migrations
 {
     [DbContext(typeof(CarDealershipDbContext))]
-    partial class CarDealershipDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200805235138_AddedContracts")]
+    partial class AddedContracts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,10 +115,8 @@ namespace CarDealershipRepository.Ef.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId")
+                    b.HasIndex("ClientId")
                         .IsUnique();
-
-                    b.HasIndex("ClientId");
 
                     b.ToTable("Contracts");
                 });
@@ -132,7 +132,7 @@ namespace CarDealershipRepository.Ef.Migrations
                 {
                     b.HasOne("CarDealershipDomain.Car", "Car")
                         .WithOne()
-                        .HasForeignKey("CarDealershipDomain.Contract", "CarId")
+                        .HasForeignKey("CarDealershipDomain.Contract", "ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

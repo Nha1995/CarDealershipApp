@@ -4,14 +4,16 @@ using CarDealershipRepository.Ef;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarDealershipRepository.Ef.Migrations
 {
     [DbContext(typeof(CarDealershipDbContext))]
-    partial class CarDealershipDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200805113359_MadeCarClientIdNullable")]
+    partial class MadeCarClientIdNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,64 +85,11 @@ namespace CarDealershipRepository.Ef.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("CarDealershipDomain.Contract", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CarId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ClientId")
-                        .HasColumnType("bigint");
-
-                    b.Property<double>("CreditTerm")
-                        .HasColumnType("float");
-
-                    b.Property<double>("FirstPayment")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MonthlyPayment")
-                        .HasColumnType("float");
-
-                    b.Property<double>("TotalCost")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("isCredit")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId")
-                        .IsUnique();
-
-                    b.HasIndex("ClientId");
-
-                    b.ToTable("Contracts");
-                });
-
             modelBuilder.Entity("CarDealershipDomain.Car", b =>
                 {
                     b.HasOne("CarDealershipDomain.Client", "Client")
                         .WithMany("Cars")
                         .HasForeignKey("ClientId");
-                });
-
-            modelBuilder.Entity("CarDealershipDomain.Contract", b =>
-                {
-                    b.HasOne("CarDealershipDomain.Car", "Car")
-                        .WithOne()
-                        .HasForeignKey("CarDealershipDomain.Contract", "CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CarDealershipDomain.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

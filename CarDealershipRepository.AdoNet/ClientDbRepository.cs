@@ -18,7 +18,7 @@ namespace CarDealershipRepository.AdoNet
             {
                 using (SqlConnection connection = GetConnection())
                 {
-                    string insertCommand = $"INSERT INTO Client VALUES ('{client.PassportId}', '{client.Surname}', '{client.Name}')";
+                    string insertCommand = $"INSERT INTO Clients VALUES ('{client.PassportId}', '{client.Surname}', '{client.Name}')";
                     SqlCommand command = new SqlCommand(insertCommand, connection);
                     command.ExecuteNonQuery();
                 }
@@ -30,16 +30,16 @@ namespace CarDealershipRepository.AdoNet
             }
         }
 
-        public LinkedList<Client> ClientList()
+        public List<Client> ClientList()
         {
             using (SqlConnection connection = GetConnection())
             {
                 Client instanceClient;
-                string selectCommand = $"select Client.Id AS ClientId, Car.Id AS CarId , PassportId, Surname,Name,Number,Model,Year,Color,Price,Sold,ClientId  from Client left join Car on Client.Id = Car.ClientId";
+                string selectCommand = $"select Clients.Id AS ClientId, Cars.Id AS CarId , PassportId, Surname,Name,Number,Model,Year,Color,Price,Sold,ClientId  from Clients left join Cars on Clients.Id = Cars.ClientId";
                 SqlCommand command = new SqlCommand(selectCommand, connection);
                 DbDataReader reader = command.ExecuteReader();
 
-                var clientList = new LinkedList<Client>();
+                var clientList = new List<Client>();
                 reader.Read();
                 instanceClient = Client.CreateClient((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
 
@@ -55,7 +55,7 @@ namespace CarDealershipRepository.AdoNet
                     }
                     else
                     {
-                        clientList.AddLast(instanceClient);
+                        clientList.Add(instanceClient);
 
                         instanceClient = Client.CreateClient((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());
 
@@ -65,7 +65,7 @@ namespace CarDealershipRepository.AdoNet
                         }
                     }
                 }
-                clientList.AddLast(instanceClient);
+                clientList.Add(instanceClient);
                 return clientList;
             }
         }
@@ -74,7 +74,7 @@ namespace CarDealershipRepository.AdoNet
         {
             using (SqlConnection connection = GetConnection())
             {
-                string selectCommand = $"SELECT COUNT(*) AS Count FROM Client";
+                string selectCommand = $"SELECT COUNT(*) AS Count FROM Clients";
                 SqlCommand command = new SqlCommand(selectCommand, connection);
                 DbDataReader reader = command.ExecuteReader();
 
@@ -88,7 +88,7 @@ namespace CarDealershipRepository.AdoNet
         {
             using (SqlConnection connection = GetConnection())
             {
-                string insertCommand = $"SELECT * FROM Client WHERE Client.PassportId ='{passportId}'";
+                string insertCommand = $"SELECT * FROM Clients WHERE Clients.PassportId ='{passportId}'";
                 SqlCommand command = new SqlCommand(insertCommand, connection);
                 DbDataReader reader = command.ExecuteReader();
 

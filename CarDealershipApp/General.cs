@@ -38,6 +38,8 @@ namespace CarDealershipApp
                 case AppMode.Ef:
                     var dbContext = CreateDbContext(appOptions.ConnectionString);
                     _carRepository = new CarEfRepository(dbContext);
+                    _clientRepository = new ClientEfRepository(dbContext);
+                    _contractRepository = new ContractEfRepository(dbContext);
                     break;
             }
             _commands = new List<Command>();

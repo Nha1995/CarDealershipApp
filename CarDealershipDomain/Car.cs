@@ -15,7 +15,7 @@ namespace CarDealershipDomain
         public long Id { get; set; }
         public bool Sold { get; set; }
         public Client Client { get; set; }
-        public long ClientId { get; set; }
+        public long? ClientId { get; set; }
 
         public Car()
         {

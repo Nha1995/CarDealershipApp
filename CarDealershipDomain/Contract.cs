@@ -6,16 +6,16 @@ namespace CarDealershipDomain
 {
     public class Contract
     {
-        public Client Client;
-        public Car Car;
-        public long Id;
-        public long ClientId;
-        public long CarId;
-        public double TotalCost;
-        public double FirstPayment;
-        public double CreditTerm;
-        public double MonthlyPayment;
-        public bool isCredit;
+        public Client Client { get; set; }
+        public Car Car { get; set; }
+        public long Id { get; set; }
+        public long ClientId { get; set; }
+        public long CarId { get; set; }
+        public double TotalCost { get; set; }
+        public double FirstPayment { get; set; }
+        public double CreditTerm { get; set; }
+        public double MonthlyPayment { get; set; }
+        public bool isCredit { get; set; }
         public Contract(Car car, Client client)
         {
             Client = client;
