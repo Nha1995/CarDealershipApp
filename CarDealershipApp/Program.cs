@@ -35,7 +35,7 @@ namespace CarDealershipApp
             appOptions.ConnectionString = configuration.GetValue<string>("AppOptions:ConnectionString");
 
             var services = new ServiceCollection();
-            
+
             switch (appOptions.Mode)
             {
                 case AppMode.InMemory:

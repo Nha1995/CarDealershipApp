@@ -18,7 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealershipRepository.InM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealershipRepository.AdoNet", "CarDealershipRepository.AdoNet\CarDealershipRepository.AdoNet.csproj", "{49789F73-6E23-4870-B620-654AB7ACB384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealershipRepository.Ef", "CarDealershipRepository.Ef\CarDealershipRepository.Ef.csproj", "{11F2CF91-C50F-4BE2-A5F4-E6BF6399E2C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealershipRepository.Ef", "CarDealershipRepository.Ef\CarDealershipRepository.Ef.csproj", "{11F2CF91-C50F-4BE2-A5F4-E6BF6399E2C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealershipApp.Web", "CarDealershipApp.Web\CarDealershipApp.Web.csproj", "{3B98C49D-05C8-484D-A130-F9D1575D96EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{11F2CF91-C50F-4BE2-A5F4-E6BF6399E2C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11F2CF91-C50F-4BE2-A5F4-E6BF6399E2C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11F2CF91-C50F-4BE2-A5F4-E6BF6399E2C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B98C49D-05C8-484D-A130-F9D1575D96EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B98C49D-05C8-484D-A130-F9D1575D96EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B98C49D-05C8-484D-A130-F9D1575D96EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B98C49D-05C8-484D-A130-F9D1575D96EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
