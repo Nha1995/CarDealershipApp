@@ -5,15 +5,15 @@ using System.Data.SqlClient;
 using System.Text;
 using CarDealershipDomain;
 
-namespace CarDealershipRepository
+namespace CarDealershipRepository.AdoNet
 {
     public abstract class DbRepository
     {
         protected readonly string _connectionString;
 
-        public DbRepository(string connectionString)
+        public DbRepository(AdoNetOptions options)
         {
-            _connectionString = connectionString;
+            _connectionString = options.ConnectionString;
         }
 
         protected SqlConnection GetConnection()

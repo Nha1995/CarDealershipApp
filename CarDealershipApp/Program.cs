@@ -31,38 +31,38 @@ namespace CarDealershipApp
             IConfigurationRoot configuration = builder.Build();
 
             AppOptions appOptions = new AppOptions();
-            configuration.GetSection("AppOptions").Bind(appOptions);
-
-            string connectionString = appOptions.ConnectionString;
+            appOptions.Mode = configuration.GetValue<AppMode>("AppOptions:Mode");
+            appOptions.ConnectionString = configuration.GetValue<string>("AppOptions:ConnectionString");
 
             var services = new ServiceCollection();
-
-            ICarRepository carRepository = null;
-            IClientRepository clientRepository = null;
-            IContractRepository contractRepository = null;
+            
             switch (appOptions.Mode)
             {
                 case AppMode.InMemory:
-                    contractRepository = new ContractMemoryRepository();
-                    clientRepository = new ClientMemoryRepository();
-                    carRepository = new CarMemoryRepository();
+                    services.AddSingleton<ICarRepository, CarMemoryRepository>();
+                    services.AddSingleton<IClientRepository, ClientMemoryRepository>();
+                    services.AddSingleton<IContractRepository, ContractMemoryRepository>();
                     break;
                 case AppMode.AdoNet:
-                    contractRepository = new ContractDbRepository(connectionString);
-                    clientRepository = new ClientDbRepository(connectionString);
-                    carRepository = new CarDbRepository(connectionString);
+                    services.AddSingleton(new AdoNetOptions { ConnectionString = appOptions.ConnectionString });
+                    services.AddSingleton<ICarRepository, CarDbRepository>();
+                    services.AddSingleton<IClientRepository, ClientDbRepository>();
+                    services.AddSingleton<IContractRepository, ContractDbRepository>();
                     break;
                 case AppMode.Ef:
-                    services.AddDbContext<CarDealershipDbContext>(cfg => cfg.UseSqlServer(connectionString));
+                    services.AddDbContext<CarDealershipDbContext>(cfg => cfg.UseSqlServer(appOptions.ConnectionString));
                     //All above has to be replaced with service registration in services
-                    var dbContext = CreateDbContext(appOptions.ConnectionString);
-                    carRepository = new CarEfRepository(dbContext);
-                    clientRepository = new ClientEfRepository(dbContext);
-                    contractRepository = new ContractEfRepository(dbContext);
+                    services.AddSingleton<ICarRepository, CarEfRepository>();
+                    services.AddSingleton<IClientRepository, ClientEfRepository>();
+                    services.AddSingleton<IContractRepository, ContractEfRepository>();
                     break;
             }
 
-            General general = new General(carRepository, clientRepository, contractRepository);
+            services.AddSingleton<General>();
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            General general = serviceProvider.GetRequiredService<General>();
             general.Start();
         }
     }

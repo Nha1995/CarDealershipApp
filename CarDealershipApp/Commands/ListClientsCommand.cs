@@ -15,15 +15,15 @@ namespace CarDealershipCommands
 
         public override string CommandText()
         {
-            return "list client";
+            return "list clients";
         }
 
         public override CommandResult Execute()
         {
-            bool sold = false;
             string ID;
             Console.WriteLine();
-            foreach (Client client in _ClientRepository.ClientList())
+            bool WithCars = false;
+            foreach (Client client in _ClientRepository.ClientList(WithCars))
             {
                 Console.WriteLine($"ID: {client.Id} Client passportID: {client.PassportId} Name: {client.Name} Surname: {client.Surname}");
                 if (client.Cars.Count > 0)

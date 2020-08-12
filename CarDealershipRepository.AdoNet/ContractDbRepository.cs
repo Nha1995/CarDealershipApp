@@ -10,7 +10,10 @@ namespace CarDealershipRepository.AdoNet
 {
     public class ContractDbRepository : DbRepository, IContractRepository
     {
-        public ContractDbRepository(string connectionString) : base(connectionString) { }
+        public ContractDbRepository(AdoNetOptions options) : base(options)
+        {
+            Console.WriteLine("Contract DB Repository created");
+        }
         public void AddContract(Contract contract)
         {
             using (SqlConnection connection = GetConnection())
@@ -34,7 +37,7 @@ namespace CarDealershipRepository.AdoNet
 
                 while (reader.Read())
                 {
-                    var contract = new Contract((long)reader["ClientId"], (long)reader["CarId"], (double)reader["TotalCost"], (double)reader["FirstPayment"], (double)reader["CreditTerm"], (double)reader["MonthlyPayment"],(bool)reader["isCredit"]);
+                    var contract = new Contract((long)reader["ClientId"], (long)reader["CarId"], (double)reader["TotalCost"], (double)reader["FirstPayment"], (double)reader["CreditTerm"], (double)reader["MonthlyPayment"], (bool)reader["isCredit"]);
 
                     contract.Car = Car.CreateCar((long)reader["Id"], (bool)reader["Sold"], reader["Number"].ToString(), reader["Model"].ToString(), (int)reader["Year"], reader["Color"].ToString(), (int)reader["Price"]);
                     contract.Client = Client.CreateClient((long)reader["ClientId"], reader["PassportId"].ToString(), reader["Surname"].ToString(), reader["Name"].ToString());

@@ -18,7 +18,7 @@ namespace CarDealershipRepository.InMemory
         {
             return _clients.Count;
         }
-        public List<Client> ClientList()
+        public List<Client> ClientList(bool WithCars)
         {
                 return _clients;
         }

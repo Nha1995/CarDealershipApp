@@ -10,7 +10,10 @@ namespace CarDealershipRepository.AdoNet
 {
     public class CarDbRepository : DbRepository, ICarRepository
     {
-        public CarDbRepository(string connectionString) : base(connectionString) { }
+        public CarDbRepository(AdoNetOptions options) : base(options)
+        {
+            Console.WriteLine("Car Db repository created");
+        }
 
         public Car GetCarByNumber(string carNumber)
         {

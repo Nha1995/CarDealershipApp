@@ -25,12 +25,14 @@ namespace CarDealershipRepository.Ef
             return true;
         }
 
-        public List<Client> ClientList()
+        public List<Client> ClientList(bool WithCars)
         {
-            List<Client> clients = _dbContext.Clients
-                .Include(c => c.Cars)
-                .ToList();
-            return clients;
+            var query = _dbContext.Clients.Include(c => c.Cars).AsQueryable();
+            if (WithCars == true)
+            {
+                query = query.Where(c => c.Cars.Any());
+            }
+            return query.ToList();
         }
 
         public int Count()

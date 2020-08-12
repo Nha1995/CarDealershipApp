@@ -9,7 +9,7 @@ namespace CarDealershipRepository.Interfaces
     {
         public int Count();
 
-        List<Client> ClientList();
+        List<Client> ClientList(bool WithCars);
 
         public bool AddClient(Client client);
 

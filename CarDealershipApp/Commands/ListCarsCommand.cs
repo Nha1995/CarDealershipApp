@@ -17,26 +17,25 @@ namespace CarDealershipCommands
 
         public override CommandResult Execute()
         {
-            int k=0;
             bool sold = false;
             Console.WriteLine();
-            foreach (Car car in _carRepository.List(sold))
+            var cars = _carRepository.List(sold);
+            foreach (Car car in cars)
             {
                     Console.WriteLine($"ID: {car.Id} Number: {car.Number} Model: {car.Model} Year: {car.Year} Color: {car.Color} Price: {car.Price}");
                     Console.WriteLine("______________________________________________________________");
-                    ++k;
             }
-            if (k == 0)
+            if (cars.Count == 0)
             {
                 return new CommandResult(false, "You have no cars");
             }
-            if (k > 1)
+            if (cars.Count > 1)
             {
-                return new CommandResult(true, $"Listed {k} cars");
+                return new CommandResult(true, $"Listed {cars.Count} cars");
             }
             else
             {
-                return new CommandResult(true, $"{k} car is listed");
+                return new CommandResult(true, $"{cars.Count} car is listed");
             }
         }
     }

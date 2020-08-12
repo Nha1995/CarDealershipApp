@@ -19,8 +19,9 @@ namespace CarDealershipApp.DisplayCommands
         {
             bool sold = true;
             Console.WriteLine();
+            var cars = _carRepository.List(sold);
 
-            foreach (Car car in _carRepository.List(sold))
+            foreach (Car car in cars)
             {
                 if (car.Client != null)
                 {
@@ -29,13 +30,13 @@ namespace CarDealershipApp.DisplayCommands
                 }
                 Console.WriteLine("______________________________________________________________");
             }
-            if (_carRepository.Count() > 1)
+            if (cars.Count > 1)
             {
-                return new CommandResult(true, $"Listed {_carRepository.Count()} cars");
+                return new CommandResult(true, $"Listed {cars.Count} cars");
             }
-            if(_carRepository.Count()==1)
+            if(cars.Count == 1)
             {
-                return new CommandResult(true, $"{_carRepository.Count()} car is listed");
+                return new CommandResult(true, $"{cars.Count} car is listed");
             }
             return new CommandResult(false, "You have no cars.");
         }

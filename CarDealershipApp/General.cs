@@ -10,6 +10,8 @@ using CarDealershipApp.Options;
 using CarDealershipRepository.InMemory;
 using CarDealershipRepository.Ef;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Xml;
 
 namespace CarDealershipApp
 {
@@ -40,21 +42,13 @@ namespace CarDealershipApp
         }
         public void Start()
         {
-            Console.WriteLine("Please choose a command: ");
+            ConsoleHelper.WriteLineColored("Please choose a command: ", ConsoleColor.White);
             string commandText = Console.ReadLine();
 
 
             while (commandText != "end")
             {
-                Command curCommand = null;
-                for (int i = 0; i < _commands.Count; ++i)
-                {
-                    if (_commands[i].CommandText() == commandText)
-                    {
-                        curCommand = _commands[i];
-                        break;
-                    }
-                }
+                var curCommand = _commands.FirstOrDefault(c => c.CommandText() == commandText);
 
                 if (curCommand == null)
                 {
@@ -74,14 +68,14 @@ namespace CarDealershipApp
         {
             CommandResult commandResult = command.Execute();
 
-            ConsoleColor color = ConsoleColor.Green;
             if (!commandResult.Success)
             {
-                color = ConsoleColor.Red;
-                Console.ForegroundColor = ConsoleColor.Red;
+                ConsoleHelper.WriteLineError(commandResult.Message);
             }
-
-            ConsoleHelper.WriteLineColored(commandResult.Message, color);
+            else
+            {
+                ConsoleHelper.WriteLineSuccess(commandResult.Message);
+            }            
         }
     }
 }
