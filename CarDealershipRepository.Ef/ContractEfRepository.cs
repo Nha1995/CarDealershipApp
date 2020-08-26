@@ -12,10 +12,7 @@ namespace CarDealershipRepository.Ef
     {
         public ContractEfRepository(CarDealershipDbContext dbContext) : base(dbContext) { }
         public void AddContract(Contract contract)
-        {
-            var boolSold = _dbContext.Contracts.FirstOrDefault(c => c.Car.Sold==true);
-
-            
+        {           
             _dbContext.Add(contract);
             _dbContext.SaveChanges();
         }

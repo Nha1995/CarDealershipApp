@@ -45,7 +45,7 @@ namespace CarDealershipCommands
                 return new CommandResult(false, message);
             }
             _carRepository.Sell(car, client);
-            Contract contract = new Contract(car, client);
+            Contract contract = Contract.CreateContract(car, client);
 
             Console.WriteLine("Payment type (cash or credit):");
             string paymentType = Console.ReadLine();
@@ -68,7 +68,7 @@ namespace CarDealershipCommands
                 double Term = double.Parse(Console.ReadLine());
                 contract.FirstPayment = firstPay;
                 contract.CreditTerm = Term;
-                contract.TotalCost = ((contract.Car.Price - contract.FirstPayment) / 10) * (contract.CreditTerm / 12) + contract.Car.Price;
+                contract.TotalCost = (((contract.Car.Price - (double)contract.FirstPayment) / 10) * (double)(contract.CreditTerm / 12) + contract.Car.Price);
                 contract.MonthlyPayment = (contract.TotalCost - contract.FirstPayment) / contract.CreditTerm;
             }
 

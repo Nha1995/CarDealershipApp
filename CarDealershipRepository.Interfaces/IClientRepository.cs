@@ -7,12 +7,12 @@ namespace CarDealershipRepository.Interfaces
 {
     public interface IClientRepository
     {
-        public int Count();
+        int Count();
 
         List<Client> ClientList(bool WithCars);
 
-        public bool AddClient(Client client);
+        bool AddClient(Client client);
 
-        public Client GetClientByPassportId(string passportId);
+        Client GetClientByPassportId(string passportId);
     }
 }

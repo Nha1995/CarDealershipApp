@@ -1,4 +1,6 @@
-﻿using CarDealershipDomain;
+﻿using AutoMapper;
+using CarDealershipApp.Web.Models;
+using CarDealershipDomain;
 using CarDealershipRepository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,13 +10,16 @@ using System.Threading.Tasks;
 
 namespace CarDealershipApp.Web.Controllers
 {
-    [Route("[controller]")]
+    [Route("Api/[controller]")]
     public class CarsController : ControllerBase
     {
         private readonly ICarRepository _carRepository;
-        public CarsController(ICarRepository carRepository)
+        private readonly IMapper _mapper;
+
+        public CarsController(ICarRepository carRepository, IMapper mapper)
         {
             _carRepository = carRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -25,7 +30,7 @@ namespace CarDealershipApp.Web.Controllers
         }
 
         [HttpGet("{number}")]
-        public ActionResult<Car> GetCarByNumber([FromRoute] string number)
+        public ActionResult GetCarByNumber([FromRoute] string number)
         {
             var res = _carRepository.GetCarByNumber(number);
 
@@ -36,15 +41,17 @@ namespace CarDealershipApp.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Car> Create([FromBody] Car car)
+        public ActionResult<CarVm> Create([FromBody] CarBaseModel car)
         {
-            var success = _carRepository.Add(car);
+            var entity = _mapper.Map<Car>(car);
+            var success = _carRepository.Add(entity);
             if (!success)
             {
-                return BadRequest($"Car with number: {car.Number} already exists");
+                return BadRequest($"Car with number: {entity.Number} already exists");
             }
 
-            return Ok(car);
+            var Vm = _mapper.Map<CarVm>(entity);
+            return Ok(Vm);
         }
     }
 }

@@ -5,7 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CarDealershipRepository.InMemory\CarDealershipRepository.InMemory.csproj" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CarDealershipApp\CarDealershipApp.csproj" />
+    <ProjectReference Include="..\CarDealershipDomain\CarDealershipDomain.csproj" />
+    <ProjectReference Include="..\CarDealershipRepository.Ef\CarDealershipRepository.Ef.csproj" />
     <ProjectReference Include="..\CarDealershipRepository.Interfaces\CarDealershipRepository.Interfaces.csproj" />
   </ItemGroup>
 

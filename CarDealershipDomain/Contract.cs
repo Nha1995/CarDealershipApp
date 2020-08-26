@@ -12,24 +12,36 @@ namespace CarDealershipDomain
         public long ClientId { get; set; }
         public long CarId { get; set; }
         public double TotalCost { get; set; }
-        public double FirstPayment { get; set; }
-        public double CreditTerm { get; set; }
-        public double MonthlyPayment { get; set; }
+        public double? FirstPayment { get; set; }
+        public double? CreditTerm { get; set; }
+        public double? MonthlyPayment { get; set; }
         public bool isCredit { get; set; }
-        public Contract(Car car, Client client)
+        public Contract()
         {
-            Client = client;
-            Car = car;
+
         }
-        public Contract(long ClientId, long CarId, double TotalCost, double FirstPayment, double CreditTerm, double MonthlyPayment, bool isCredit)
+        public static Contract CreateContract(Car car, Client client)
         {
-            this.ClientId = ClientId;
-            this.CarId = CarId;
-            this.TotalCost = TotalCost;
-            this.FirstPayment = FirstPayment;
-            this.CreditTerm = CreditTerm;
-            this.MonthlyPayment = MonthlyPayment;
-            this.isCredit = isCredit;
+            Contract contract = new Contract
+            {
+                Client = client,
+                Car = car
+            };
+            return contract;
+        }
+        public static Contract CreateContract(long ClientId, long CarId, double TotalCost, double FirstPayment, double CreditTerm, double MonthlyPayment, bool isCredit)
+        {
+            Contract contract = new Contract
+            {
+                ClientId = ClientId,
+                CarId = CarId,
+                TotalCost = TotalCost,
+                FirstPayment = FirstPayment,
+                CreditTerm = CreditTerm,
+                MonthlyPayment = MonthlyPayment,
+                isCredit = isCredit
+            };
+            return contract;
         }
     }
 }

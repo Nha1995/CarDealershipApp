@@ -7,11 +7,11 @@ namespace CarDealershipRepository.Interfaces
 {
     public interface IContractRepository
     {
-        public int Count();
+        int Count();
 
         List<Contract> ContractList();
 
-        public void AddContract(Contract contract);
+        void AddContract(Contract contract);
 
     }
 }
