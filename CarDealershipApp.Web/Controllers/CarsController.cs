@@ -2,6 +2,7 @@
 using CarDealershipApp.Web.Models;
 using CarDealershipDomain;
 using CarDealershipRepository.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,16 @@ namespace CarDealershipApp.Web.Controllers
         [HttpGet]
         public ActionResult<List<Car>> Get(bool sold)
         {
-            var res = _carRepository.List(sold);
-            return Ok(res);
+            try
+            {
+                var res = _carRepository.List(sold);
+                return Ok(res);
+            }
+            catch
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database failed");
+            }
+            
         }
 
         [HttpGet("{number}")]
